@@ -1,0 +1,64 @@
+{% extends "header.html" %}
+{% block content %}
+
+	<div class = 'flash'>
+		{% with messages = get_flashed_messages() %}
+	  	{% if messages %}
+	    <ul>
+	    	{% for message in messages %}
+	      	<li> <strong> {{ message }} </strong> </li>
+	      {% endfor %}
+	    </ul>
+	    {% endif %}
+	  {% endwith %}
+	</div>
+
+	<div class="row cakes">
+		<div class="col-md-8">
+			<h1>{{ cake.name }}</h1>
+		</div>
+	</div>
+
+<div class="row top">
+		<div class="col-md-4">
+			<a href="{{url_for('editCake', cake_id = cake.id )}}">
+				<button class="btn" id="edit-cake">Edit Cake</button>
+			</a>
+		</div>
+
+	<div class="col-md-4">
+		<a href="{{url_for('newElement', cake_id = cake.id )}}">
+			<button class="btn" id="new-element">Add Element</button>
+		</a>
+	</div>
+
+	<div class="col-md-4">
+		<a href="{{url_for('deleteCake', cake_id = cake.id )}}">
+			<button class="btn" id="delete-cake">Delete Cake</button>
+		</a>
+	</div>
+</div>
+
+	<div class="row">
+		<div class="col-md-8">
+  		<h2>Elements:</h2>
+		</div>
+	</div>
+
+	<div class = 'row'>
+  	{% for i in elements %}
+  	<div class = "col-md-3 int">
+  		<p>{{i.name}}</p>
+  		<p>Cost {{i.price}} $ </p>
+			<div class="row">
+				<div class="col-md-6">
+  				<a href='{{url_for('editElement', cake_id = cake.id, element_id = i.id) }}'>Edit</a>
+				</div>
+  			<div class="col-md-6">
+  				<a href = '{{url_for('deleteElement', cake_id = cake.id, element_id = i.id ) }}'>Delete</a>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+  </div>
+{% endblock %}

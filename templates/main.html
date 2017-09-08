@@ -1,0 +1,56 @@
+{% extends "header.html" %}
+{% block content %}
+
+	<div class = 'flash'>
+		{% with messages = get_flashed_messages() %}
+	  	{% if messages %}
+      <ul>
+	    	{% for message in messages %}
+	    		<li> <strong> {{ message }} </strong> </li>
+	    	{% endfor %}
+	    </ul>
+	    {% endif %}
+	  {% endwith %}
+
+	</div>
+	<div class="row cakes">
+		<div class="col-md-8">
+			<h1>Cakes</h1>
+		</div>
+		<div class="col-md-4">
+						{%if 'username' not in session %}
+				<div class="login"><a href="{{url_for('showLogin')}}">Click Here to Login </a></div>
+				{% else %}
+				<div class="login"><a href="{{url_for('gdisconnect')}}">Logout </a></div>
+				{% endif %}
+		</div>
+	</div>
+
+{%if 'username' in session %}
+	<div class="row">
+		<div class="col-md-12 top">
+			<a href="{{url_for('newCake')}}">
+				<button class="btn" id="new-cake">
+					<span class=""></span>New Cake
+				</button>
+			</a>
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
+	{% for cake in cakes %}
+		{%if 'username' in session %}
+		<a href = "{{url_for('showElements', cake_id = cake.id)}}">
+		{% endif %}
+		<a href = "{{url_for('description', cake_id = cake.id)}}">
+				<div class="col-md-3 int">
+						<h3>{{cake.name}}</h3></a>
+						<h4>Описание: {{cake.description}}</h4>
+						<h4>картинка: {{cake.picture}}</h4>
+						<h4>Цена за кг: {{cake.price_for_kg}}</h4>
+						<h4>диаметр: {{cake.diameter}}</h4>
+					</div>
+		</a>
+	{% endfor %}
+	</div>
+{% endblock %}

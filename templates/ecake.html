@@ -1,0 +1,49 @@
+{% extends "header.html" %}
+{% block content %}
+	<div class="row">
+			<h1>Edit {{cake.name}}</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		<form action="#" method = "post">
+  			<label for="name">Name:</label>
+  			<input type ="text" maxlength="100" class="form-control" name="name" value="{{cake.name}}">
+
+  			<label for="description">Description:</label>
+  			<textarea class="form-control" maxlength="250" rows="3" name="description">{{cake.description}}</textarea>
+
+  			<label for="course">Course:</label>
+
+					<div class="radio">
+  					<label>
+  					  <input type="radio" name="course" id="course1" value="chocolate" {% if cake.course == 'chocolate'%}checked{%endif%}>Chocolate
+  					</label>
+  				</div>
+
+  				<div class="radio">
+  					<label>
+  					  <input type="radio" name="course" id="course2" value="citric" {% if cake.course == 'citric' %}checked{%endif%}>Citric
+  					</label>
+  				</div>
+
+  				<div class="radio">
+  					<label>
+  					  <input type="radio" name="course" id="course3" value="redvelvet" {% if cake.course == 'redvelvet'%}checked{%endif%}>Red velvet
+  					</label>
+  				</div>
+
+  				<div class="radio">
+  					<label>
+  					  <input type="radio" name="course" id="course4" value="carrot" {%if cake.course =='carrot'%}checked{%endif%}>Carrot
+  					</label>
+  				</div>
+  					<button type="submit" class="btn" id="submit" type="submit">Save</button>
+				</div>
+			</form>
+		</div>
+	<div class="col-md-3">
+		<a href = '{{url_for('showCakes')}}'>
+			<button class="btn">Cancel</button>
+		</a>
+	</div>
+{% endblock %}
